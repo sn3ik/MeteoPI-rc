@@ -1,0 +1,8 @@
+AGGIUNGERE UNA VARIABILE
+
+1. meteopi.cfg -> aggiungere la voce "variabile = valore"
+2. parsecfg.php -> aggiungere la voce "$variabile = 'variabile'; $variabile_data = '';"
+3. readcfg.php -> aggiungere la voce "if(trim($liner[0]) == $variabile) $variabile_data = $liner[1];"
+4. update.php -> aggiungere la voce "write($myfile,$variabile." = ".trim($_POST["variabile"])."\n");"
+5. meteopi.php -> aggiungere i tag necessari per editare il valore della variabile
+6. config.py -> aggiungere la voce "self.variabile = config.gettipo('categoria', 'variabile')"
