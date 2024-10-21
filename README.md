@@ -1,7 +1,7 @@
 MeteoPi for Raspberry 
 
 1. Clone repository
-   git clone https://github.com/sn3ik/MeteoPI.git
+- git clone https://github.com/sn3ik/MeteoPI.git
   
 2. Install Rtl
    cd rtl-sdr
