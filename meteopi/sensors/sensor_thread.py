@@ -113,7 +113,7 @@ class SensorThread(threading.Thread):
             sensor = sensors.sensor_none.Sensor_None(self.cfg)           
                                               
         else:
-            log1("Sensor type not implemented. Exiting ...")
+            log("Sensor type not implemented. Exiting ...")
             os.system("sudo ./killmeteopi.sh")
          
         # mail loop    
