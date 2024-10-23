@@ -71,9 +71,24 @@ def meteopi():
     #os.chdir("MeteoPI")
 
     os.system("sudo mv meteopi /home/pi")
+    
+    os.chdir("/home/pi/meteopi/rtl-sdr")
+    os.chdir("mkdir build && cd build")
+    os.chdir("cmake ../ -DDETACH_KERNEL_DRIVER=ON -DINSTALL_UDEV_RULES=ON")
+    os.chdir("make")
+    os.chdir("sudo make install")
+    os.chdir("..")
+    os.chdir("..")
+
+    os.chdir("rtl_433")
+    os.chdir("mkdir build && cd build")
+    os.chdir("cmake ../")
+    os.chdir("make")
+    os.chdir("sudo make install")
 
 
     print('\033[92m'"MeteoPI installato con successo'\033[0m'")
+
 pass
 
     
