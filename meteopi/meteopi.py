@@ -160,7 +160,7 @@ os.system( "sudo chmod +x ./killmeteopi.sh" )
 os.system( "sudo chown  pi ./DHT" )
 #os.system( "sudo chown  pi ./mcp3002" )
 #os.system( "sudo chown  pi ./TX23" )
-os.system( "sudo chown  pi ./wh1080_rf" )
+#os.system( "sudo chown  pi ./wh1080_rf" )
 #os.system( "sudo chown -R pi ./jscolor" )
 #os.system( "sudo chmod -R 777 ./jscolor" )
 
