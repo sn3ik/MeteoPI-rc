@@ -5,19 +5,7 @@ MeteoPI - Backend
    - sudo lighttpd-enable-mod fastcgi
    - sudo lighttpd-enable-mod fastcgi-php
    - sudo nano /etc/lighttpd/conf-available/15-fastcgi-php.conf
-   - ADD ("
-     
-            # -*- depends: fastcgi -*-
-            # /usr/share/doc/lighttpd/fastcgi.txt.gz
-            
-            ## Start an FastCGI server for php
-            fastcgi.server += ( ".php" =>
-                    ((
-                            "socket" => "/var/run/php/php8.2-fpm.sock",
-                            "broken-scriptfilename" => "enable"
-                    ))
-            )"
-     )
+   - mv lighttpd/15-fastcgi-php.conf /etc/lighttpd/conf-available/
    - sudo service lighttpd force-reload
 
 2. Clone repository
