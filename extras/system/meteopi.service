@@ -1,0 +1,18 @@
+[Unit]
+Description=METEOPI
+#After=network.target
+
+[Service]
+Type=simple
+PIDFile=/run/meteopi.pid
+ExecStartPre=/usr/local/bin/meteopikillall.sh
+ExecStart=/usr/local/bin/meteopistart.sh
+ExecRestart=/usr/local/bin/meteopikillall.sh && sleep 5 && /usr/local/bin/meteopistart.sh
+ExecStop=/usr/local/bin/meteopikillall.sh
+Restart=always
+KillMode=process
+TimeoutSec=900
+
+[Install]
+WantedBy=multi-user.target
+

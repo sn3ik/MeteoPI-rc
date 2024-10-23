@@ -1,0 +1,52 @@
+#!/bin/sh
+#
+#    10-sysinfo - generate the system information
+#    Copyright (c) 2013 Nick Charlton
+#
+#    Authors: Nick Charlton <hello@nickcharlton.net>
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License along
+#    with this program; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+date=`date`
+load=`cat /proc/loadavg | awk '{print $1}'`
+root_usage=`df -h / | awk '/\// {print $(NF-1)}'`
+meteopi_usage=`df -h /home/pi/meteopi | awk '/\// {print $(NF-1)}'`
+memory_usage=`free -m | awk '/Mem:/ { total=$2 } /buffers\/cache/ { used=$3 } END { printf("%3.1f%%", used/total*100)}'`
+#swap_usage=`free -m | awk '/Swap/ { printf("%3.1f%%", "exit !$2;$3/$2*100") }'`
+users=`users | wc -w`
+time=`uptime | grep -ohe 'up .*' | sed 's/,/\ hours/g' | awk '{ printf $2" "$3 }'`
+processes=`ps aux | wc -l`
+#ip=`ifconfig $(route | grep default | awk '{ print $8 }') | grep "inet" | awk '{print $2}' | awk '{print $1}'`
+ip=`hostname -I | awk '{print $1}'`
+ExtIP=$(curl --silent http://myexternalip.com/raw)
+#cpu=`top -n 1 | grep "%Cpu" | awk '{ print $8 }'`
+cpu_load=`cat /proc/loadavg | awk '{print $1*100 "%"}'`
+
+echo "System information as of: $date"
+echo
+printf "System uptime:\033[01;32m\t\t%s$time \033[00;37m\n"
+printf ""
+printf "CPU:\033[01;32m\t\t\t%s\t\033[00;37m\n" $cpu_load
+printf "System load:\033[01;32m\t\t%s\t\033[00;37m\n" $load 
+printf "Memory usage:\033[01;32m\t\t%s\t\033[00;37m\n" $memory_usage 
+printf "Usage on /:\033[01;32m\t\t%s\t\033[00;37m\n" $root_usage
+printf "Usage on /meteopi:\033[01;32m\t%s\033[00;37m\n" $meteopi_usage
+printf "Local Users:\033[01;32m\t\t%s\t\033[00;37m\n" $users
+printf "Processes:\033[01;32m\t\t%s\n\033[00;37m" $processes
+
+printf "External IP Address:\033[01;32m\t%s\n\033[00;37m" $ExtIP
+printf "Internal IP Address:\033[01;32m\t%s\n\033[00;37m" $ip
+
+echo

@@ -1,0 +1,12 @@
+#!/bin/sh
+echo
+printf " \033[40;01;37;04mUsage:\033[00;24;37m\n\n"
+printf " - \033[01;31mmeteopi status\033[00;37m\t check meteopi status\n"
+printf " - \033[01;31mmeteopi stop\033[00;37m\t\t stop meteopi\n"
+printf " - \033[01;31mmeteopi start\033[00;37m\t start meteopi\n"
+printf " - \033[01;31mmeteopi restart\033[00;37m\t restart meteopi\n\n"
+printf " - \033[01;31mmeteopilog\033[00;37m\t\t show realtime meteopi log (CTRL+C to exit)\n"
+printf "\n"
+printf " - \033[01;31msudo systemctl start lightdm\033[00;37m run a Desktop\n"
+#printf " - \033[01;31mro\033[00;37m to set it back in read-only mode\n"
+printf "\n"

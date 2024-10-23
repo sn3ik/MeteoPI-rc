@@ -1,0 +1,4 @@
+#! /bin/bash
+cd /home/pi/meteopi/log
+filename=$(ls -dt log* | head -1)
+tail -f -n 10000 $filename
