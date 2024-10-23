@@ -59,7 +59,7 @@ def lighttpd():
     #os.system("sudo rm -r /var/www/html/*")
 
     os.system("sudo mv * /var/www/html")
-    os.system("sudo chmod +x /var/www/html/include/*")
+    os.system("sudo chmod 777 /var/www/html/include/*")
 
 
     os.system("sudo service lighttpd force-reload")
@@ -73,7 +73,7 @@ def meteopi():
     #os.chdir("MeteoPI")
 
     os.system("sudo mv meteopi /home/pi")
-    os.system("sudo chmod +x /home/pi/meteopi/*")
+    os.system("sudo chmod 777 /home/pi/meteopi/*")
 
     
     os.chdir("extras")
