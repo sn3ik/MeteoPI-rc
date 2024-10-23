@@ -59,7 +59,7 @@ def lighttpd():
     #os.system("sudo rm -r /var/www/html/*")
 
     os.system("sudo mv * /var/www/html")
-    os.system("sudo chmod +x /var/www/html/*")
+    os.system("sudo chmod +x /var/www/html/include/*")
 
 
     os.system("sudo service lighttpd force-reload")
