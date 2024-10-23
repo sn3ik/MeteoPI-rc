@@ -71,25 +71,45 @@ def meteopi():
     #os.chdir("MeteoPI")
 
     os.system("sudo mv meteopi /home/pi")
+    
+    os.chdir("extras")
+    os.chdir("bin")
+    os.system("sudo mv * /usr/local/bin")
+    os.system("sudo chmod +x /usr/local/bin/*")
+
+    os.chdir("..")
+    os.chdir("update-motd.d")
+    os.system("sudo mv * /etc/update-motd.d")
+    os.chdir("..")
+    os.chdir("system")
+    os.system("sudo mv * /etc/systemd/system")
+    #os.system("sudo chmod +x /etc/systemd/system/*")
+
+
+    os.system("sudo systemctl enable meteopi.service")
+
+
+    
+    
     os.system("sudo apt install cmake")
     
-    os.chdir("/home/pi/meteopi/rtl-sdr")
+    os.chdir("/home/pi/meteopi/")
+    
+    os.system("git clone https://gitea.osmocom.org/sdr/rtl-sdr.git")
+    os.chdir("rtl-sdr")
     os.system("mkdir build")
     os.chdir("build")
-
-    os.system("cmake ../ -DDETACH_KERNEL_DRIVER=ON -DINSTALL_UDEV_RULES=ON")
-    os.system("make")
-    os.system("sudo make install")
-    os.chdir("..")
-    os.chdir("..")
-
-    os.chdir("rtl_433")
-    os.system("mkdir build")
-    os.chdir("build")
-
     os.system("cmake ../")
     os.system("make")
     os.system("sudo make install")
+    os.system("sudo ldconfig")
+    os.chdir("..")
+    os.chdir("..")
+
+    os.system("git clone https://github.com/merbanan/rtl_433.git")
+    os.chdir("rtl_433")
+    os.system("cmake -B build")
+    os.system("cmake --build build --target install")
 
 
     print('\033[92m'"MeteoPI installato con successo'\033[0m'")
