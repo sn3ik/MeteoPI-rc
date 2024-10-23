@@ -80,6 +80,8 @@ def meteopi():
     os.chdir("..")
     os.chdir("update-motd.d")
     os.system("sudo mv * /etc/update-motd.d")
+    os.system("sudo chmod +x /etc/update-motd.d/*")
+
     os.chdir("..")
     os.chdir("system")
     os.system("sudo mv * /etc/systemd/system")
