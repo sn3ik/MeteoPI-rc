@@ -1,0 +1,1 @@
+[{"button_id":"3","button_title":"Run Desktop","button_command":"sudo systemctl start lightdm","button_icon":"","button_style":"btn btn-primary","button_size":"btn-lg"},{"button_id":"4","button_title":"Kill Desktop","button_command":"sudo systemctl stop lightdm","button_icon":"","button_style":"btn btn-warning","button_size":"btn-lg"}]
