@@ -70,7 +70,7 @@ pass
 def meteopi():
     #os.chdir("MeteoPI")
 
-    os.chdir("sudo mv meteopi /home/pi")
+    os.system("sudo mv meteopi /home/pi")
 
 
     print('\033[92m'"MeteoPI installato con successo'\033[0m'")
