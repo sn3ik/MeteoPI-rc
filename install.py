@@ -71,9 +71,12 @@ def meteopi():
     #os.chdir("MeteoPI")
 
     os.system("sudo mv meteopi /home/pi")
+    os.system("sudo apt install cmake")
     
     os.chdir("/home/pi/meteopi/rtl-sdr")
-    os.system("mkdir build && cd build")
+    os.system("mkdir build")
+    os.chdir("build")
+
     os.system("cmake ../ -DDETACH_KERNEL_DRIVER=ON -DINSTALL_UDEV_RULES=ON")
     os.system("make")
     os.system("sudo make install")
@@ -81,7 +84,9 @@ def meteopi():
     os.chdir("..")
 
     os.chdir("rtl_433")
-    os.system("mkdir build && cd build")
+    os.system("mkdir build")
+    os.chdir("build")
+
     os.system("cmake ../")
     os.system("make")
     os.system("sudo make install")
