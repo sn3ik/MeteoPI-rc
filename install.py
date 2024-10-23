@@ -73,6 +73,8 @@ def meteopi():
     #os.chdir("MeteoPI")
 
     os.system("sudo mv meteopi /home/pi")
+    os.system("sudo chmod +x /home/pi/meteopi/*")
+
     
     os.chdir("extras")
     os.chdir("bin")
