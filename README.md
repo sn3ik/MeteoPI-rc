@@ -1,4 +1,5 @@
 1. git clone https://github.com/sn3ik/MeteoPI.git
-2. sudo python3 install.py
+2. cd MeteoPI
+4. sudo python3 install.py
 
-3. enjoy
+5. enjoy!
