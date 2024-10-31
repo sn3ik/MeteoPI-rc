@@ -54,14 +54,13 @@ def lighttpd():
     os.chdir("www")
     os.chdir("lighttpd")
     os.system("sudo mv 15-fastcgi-php.conf /etc/lighttpd/conf-available/")
-    #os.system("sudo mv lighttpd.conf /etc/lighttpd/")
 
     os.chdir("..")
     #os.system("sudo rm -r /var/www/html/*")
 
     os.system("sudo mv * /var/www/html")
     os.system("sudo chmod 777 /var/www/html/include/*")
-
+    os.system("sudo chmod 777 /var/log/lighttpd/")
 
     os.system("sudo service lighttpd force-reload")
     os.chdir("..")
