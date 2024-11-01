@@ -66,7 +66,7 @@ def lighttpd():
 
     os.system("sudo service lighttpd force-reload")
     os.chdir("..")
-    #os.system("sudo rm -R www")
+    os.system("sudo ln -s /var/www/ /home/")
 
     print('\033[92m'"MeteoPI backend installato con successo'\033[0m'")
 pass
