@@ -75,9 +75,9 @@ def meteopi():
     #os.chdir("MeteoPI")
 
     os.system("sudo mv meteopi /home/pi")
-    os.system("sudo chmod 777 /home/pi/meteopi/*")
+    os.system("sudo chmod 0755 /home/pi/")
+    os.system("sudo chmod 0755 /home/pi/meteopi/")
 
-    
     os.chdir("extras")
     os.chdir("bin")
     os.system("sudo mv * /usr/local/bin")
@@ -93,12 +93,7 @@ def meteopi():
     os.system("sudo mv * /etc/systemd/system")
     #os.system("sudo chmod +x /etc/systemd/system/*")
 
-
     os.system("sudo systemctl enable meteopi.service")
-
-
-    
-    
     os.system("sudo apt install cmake")
     
     os.chdir("/home/pi/meteopi/")
