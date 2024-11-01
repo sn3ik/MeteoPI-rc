@@ -59,8 +59,9 @@ def lighttpd():
     #os.system("sudo rm -r /var/www/html/*")
 
     os.system("sudo mv * /var/www/html")
-    os.system("sudo chmod 777 /var/www/html/include/*")
-    os.system("sudo chmod 777 /var/log/lighttpd/")
+    os.system("sudo chmod 0755 /var/www/html/")
+    os.system("sudo chmod 0777 /var/www/html/include/*")
+    os.system("sudo chmod 0777 /var/log/lighttpd/")
     # permessi per accedere ai file
     #os.system("sudo chown -R :www-data /var/www/html/")
 
