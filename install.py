@@ -85,7 +85,8 @@ def lighttpd():
     os.system("./build debian")
     os.chdir("debian-template")
     os.system("sudo apt install ./wiringpi_3.10_arm64.deb")
-    
+    os.chdir("..")
+    os.chdir("..")
 
     print('\033[92m'"MeteoPI backend installato con successo'\033[0m'")
 pass
