@@ -59,7 +59,7 @@ def lighttpd():
     os.system("sudo lighttpd-enable-mod fastcgi-php")
     print('\033[92m'"PHP installato con successo'\033[0m'")
 
-    #os.chdir("MeteoPI")
+    os.chdir("MeteoPI-rc")
     os.chdir("www")
     os.chdir("lighttpd")
     os.system("sudo mv 15-fastcgi-php.conf /etc/lighttpd/conf-available/")
@@ -92,7 +92,7 @@ def lighttpd():
 pass
 
 def meteopi():
-    #os.chdir("MeteoPI")
+    os.chdir("MeteoPI-rc")
 
     os.system("sudo mv meteopi /home/pi")
     os.system("sudo chmod 0755 /home/pi/")
