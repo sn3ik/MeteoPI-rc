@@ -2,24 +2,12 @@
 //Default Configuration
 $CONFIG = '{"lang":"en","error_reporting":false,"show_hidden":false,"hide_Cols":false,"theme":"light"}';
 
-/**
- * H3K - Tiny File Manager V2.5.5
- * @author CCP Programmers
- * @github https://github.com/prasathmani/tinyfilemanager
- * @link https://tinyfilemanager.github.io
- */
-
 //TFM version
 define('VERSION', '2.5.5');
 
 //Application Title
 define('APP_TITLE', 'Tiny File Manager');
 
-// --- EDIT BELOW CONFIGURATION CAREFULLY ---
-
-// Auth with login/password
-// set true/false to enable/disable it
-// Is independent from IP white- and blacklisting
 $use_auth = false;
 
 // Login user name and password
@@ -59,7 +47,7 @@ $default_timezone = 'Etc/UTC'; // UTC
 
 // Root path for file manager
 // use absolute path of directory i.e: '/var/www/folder' or $_SERVER['DOCUMENT_ROOT'].'/folder'
-$root_path = $_SERVER['DOCUMENT_ROOT'];
+$root_path = "/home";
 
 // Root url for links in file manager.Relative to $http_host. Variants: '', 'path/to/subfolder'
 // Will not working if $root_path will be outside of server document root
