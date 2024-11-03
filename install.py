@@ -1,6 +1,9 @@
 import csv
 import sys
 import os
+import pwd
+
+
 
 def main():
     menu()
@@ -12,6 +15,11 @@ def menu():
     print("*            MeteoPI Installer            *")
     print("*                                         *")
     print("*******************************************")
+
+    try:
+        pwd.getpwnam('pi')
+    except KeyError:
+        print('Attenzione l'utente pi non esiste.')
 
     print()
     current_directory = os.getcwd()
