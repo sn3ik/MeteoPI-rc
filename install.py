@@ -47,7 +47,7 @@ def menu():
         menu()
 
 def lighttpd():
-    os.system("git clone https://github.com/sn3ik/MeteoPI.git")
+    #os.system("git clone https://github.com/sn3ik/MeteoPI.git")
     os.system("sudo apt update && sudo apt upgrade")
     os.system("sudo apt-get install php-ssh2")
     
