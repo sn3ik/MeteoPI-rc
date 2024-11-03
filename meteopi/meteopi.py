@@ -83,6 +83,10 @@ dictModel[ 'a02100' ] = 'Raspberry Compute Module 3+ PCB 1.0'
 dictModel[ 'a03111' ] = 'Raspberry Model 4ModelB PCB 1.1 1GB'
 dictModel[ 'b03111' ] = 'Raspberry Model 4ModelB PCB 1.1 2GB'
 dictModel[ 'c03111' ] = 'Raspberry Model 4ModelB PCB 1.1 4GB'
+dictModel[ 'b04170' ] = 'Raspberry Model 5 PCB 1.0 2GB'
+dictModel[ 'c04170' ] = 'Raspberry Model 5 PCB 1.0 4GB'
+dictModel[ 'd04170' ] = 'Raspberry Model 5 PCB 1.0 8GB'
+
 
 # Load Configuration
 configfile = 'meteopi.cfg'
