@@ -19,7 +19,7 @@ def menu():
     try:
         pwd.getpwnam('pi')
     except KeyError:
-        print('Attenzione l'utente pi non esiste.')
+        print('Attenzione l\'utente pi non esiste.')
 
     print()
     current_directory = os.getcwd()
