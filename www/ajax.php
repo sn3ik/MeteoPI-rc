@@ -1,6 +1,11 @@
 <?php
 include_once('./include/config.php');
-	
+$memory_total="";
+$memory_used="";
+$memory_free="";
+$memory_shared="";
+$memory_buffers="";
+$memory_cached="";	
 
 switch ($_REQUEST['action']) {
 	case 'submit_button':
