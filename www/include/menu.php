@@ -12,7 +12,7 @@ foreach($gumcp_modules as $key => $module)
 
 	if($module['module_active']==1)
 	{
-		/*if($module['module_show_in_iframe']==1)
+		if($module['module_show_in_iframe']==1)
 		{
 			if($active_page==$key)
 			{
@@ -28,7 +28,7 @@ foreach($gumcp_modules as $key => $module)
 				echo '<li><a href="./iframe.php?module='.$key.'">'.$module['module_title'].'</a></li>';
 			}
 		}
-		else*/
+		else
 		{
 			if($active_page==$key)
 			{
