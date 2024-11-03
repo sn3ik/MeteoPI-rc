@@ -210,13 +210,6 @@ $(function() {
 								</span>
 							</div>
 
-							<!--div class="col-xs-6 col-sm-3 text-center">
-								<span class="chart" data-percent="<?php echo ($clock/1000)*100; ?>">
-									<span class="percent"><?php echo $clock; ?><i>MHz</i></span>
-									<span class="label">CPU Clock</span>
-								</span>
-							</div-->
-
 							<div class="col-xs-6 col-sm-3 text-center">
 								<span class="chart" data-percent="<?php echo $temp; ?>">
 									<span class="percent"><span id="temp"><?php echo $temp; ?></span><i>°C</i></span>
