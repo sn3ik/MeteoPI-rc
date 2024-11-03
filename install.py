@@ -44,6 +44,7 @@ def lighttpd():
     os.system("sudo apt-get install php-ssh2")
     
     os.system("sudo apt install lighttpd -y")
+    os.system("sudo apt-get install php-sqlite3")
     print('\033[92m'"Lightttpd installato con successo'\033[0m'")
     os.system("sudo apt install php8.2-fpm php8.2-mbstring php8.2-mysql php8.2-curl php8.2-gd php8.2-curl php8.2-zip php8.2-xml -y")
     os.system("sudo lighttpd-enable-mod fastcgi")
@@ -70,6 +71,13 @@ def lighttpd():
     os.system("sudo service lighttpd force-reload")
     os.chdir("..")
     os.system("sudo ln -s /var/www/ /home/")
+
+    os.system("git clone https://github.com/WiringPi/WiringPi.git")
+    os.chdir("WiringPi")
+    os.system("./build debian")
+    os.chdir("debian-template")
+    os.system("sudo apt install ./wiringpi_3.10_arm64.deb")
+    
 
     print('\033[92m'"MeteoPI backend installato con successo'\033[0m'")
 pass
