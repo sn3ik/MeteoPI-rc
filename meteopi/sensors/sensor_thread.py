@@ -27,6 +27,7 @@ import sensors.sensor_simulator
 #import sensor_wh1080rf importare i sensori qui
 import sensors.sensor_wh1080rtlsdr
 import sensors.sensor_wh4000rtlsdr
+import sensors.sensor_ws90rtlsdr
 import sensors.sensor_ws2300
 #import sensors.BME280
 #from sensors.TSL2591 import *
