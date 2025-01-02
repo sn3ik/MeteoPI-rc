@@ -364,15 +364,16 @@ $active_page = 'meteopi';
                         <option value="SIMULATE" <?php if (trim('SIMULATE') == trim($sensor_type_data)) echo 'selected'; ?> >SIMULATE</option>
                         <option value="PCE-FWS20" <?php if (trim('PCE-FWS20') == trim($sensor_type_data)) echo 'selected'; ?>>PCE-FWS20</option>
                         <option value="WH1080-RFM01" <?php if (trim('"WH1080-RFM01') == trim($sensor_type_data)) echo 'selected'; ?>>WH1080-RFM01</option>
-						<option value="WH1080_RTL-SDR" <?php if (trim('WH1080_RTL-SDR') == trim($sensor_type_data)) echo 'selected'; ?>>WH1080_RTL-SDR</option>
+			<option value="WH1080_RTL-SDR" <?php if (trim('WH1080_RTL-SDR') == trim($sensor_type_data)) echo 'selected'; ?>>WH1080_RTL-SDR</option>
                         <option value="WH4000_RTL-SDR" <?php if (trim('WH4000_RTL-SDR') == trim($sensor_type_data)) echo 'selected'; ?>>WH4000_RTL-SDR</option>
-						<option value="WMR100" <?php if (trim('WMR100') == trim($sensor_type_data)) echo 'selected'; ?>>WMR100</option>
-						<option value="WMR200" <?php if (trim('WMR200') == trim($sensor_type_data)) echo 'selected'; ?>>WMR200</option>
-						<option value="WMR918" <?php if (trim('WMR918') == trim($sensor_type_data)) echo 'selected'; ?>>WMR918</option>
-						<option value="WM918" <?php if (trim('WM918') == trim($sensor_type_data)) echo 'selected'; ?>>WM918</option>		
-						<option value="WS23XX" <?php if (trim('WS23XX') == trim($sensor_type_data)) echo 'selected'; ?>>WS23XX</option>	
-						<option value="NEVIO2" <?php if (trim('NEVIO2') == trim($sensor_type_data)) echo 'selected'; ?>>NEVIO2</option>			
-						<option value="NEVIO4" <?php if (trim('NEVIO4') == trim($sensor_type_data)) echo 'selected'; ?>>NEVIO4</option>					
+			<option value="WS90_RTL-SDR" <?php if (trim('WS90_RTL-SDR') == trim($sensor_type_data)) echo 'selected'; ?>>WS90000_RTL-SDR</option>
+			<option value="WMR100" <?php if (trim('WMR100') == trim($sensor_type_data)) echo 'selected'; ?>>WMR100</option>
+			<option value="WMR200" <?php if (trim('WMR200') == trim($sensor_type_data)) echo 'selected'; ?>>WMR200</option>
+			<option value="WMR918" <?php if (trim('WMR918') == trim($sensor_type_data)) echo 'selected'; ?>>WMR918</option>
+			<option value="WM918" <?php if (trim('WM918') == trim($sensor_type_data)) echo 'selected'; ?>>WM918</option>		
+			<option value="WS23XX" <?php if (trim('WS23XX') == trim($sensor_type_data)) echo 'selected'; ?>>WS23XX</option>	
+			<option value="NEVIO2" <?php if (trim('NEVIO2') == trim($sensor_type_data)) echo 'selected'; ?>>NEVIO2</option>			
+			<option value="NEVIO4" <?php if (trim('NEVIO4') == trim($sensor_type_data)) echo 'selected'; ?>>NEVIO4</option>					
                         <option value="NEVIO8" <?php if (trim('NEVIO8') == trim($sensor_type_data)) echo 'selected'; ?>>NEVIO8</option>
                         <option value="NEVIO16" <?php if (trim('NEVIO16') == trim($sensor_type_data)) echo 'selected'; ?>>NEVIO16</option>         
                         <option value="NEVIO16S" <?php if (trim('NEVIO16S') == trim($sensor_type_data)) echo 'selected'; ?>>NEVIO16S</option>    
