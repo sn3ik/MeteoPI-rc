@@ -119,7 +119,8 @@ def meteopi():
     os.system("sudo apt install cmake")
     
     os.chdir("/home/pi/meteopi/")
-    
+
+    os.system("sudo apt-get install libusb-1.0-0-dev")
     os.system("git clone https://gitea.osmocom.org/sdr/rtl-sdr.git")
     os.chdir("rtl-sdr")
     os.system("mkdir build")
