@@ -100,6 +100,9 @@ class SensorThread(threading.Thread):
         elif ( self.cfg.sensor_type.upper()  == "WH4000_RTL-SDR" ):
             sensor = sensors.sensor_wh4000rtlsdr.Sensor_WH4000RTLSDR(self.cfg)
 
+        elif ( self.cfg.sensor_type.upper()  == "WS90_RTL-SDR" ):
+            sensor = sensors.sensor_ws90rtlsdr.Sensor_WS90RTLSDR(self.cfg)
+
         elif ( self.cfg.sensor_type.upper()  == "WS23XX" ):
             sensor = sensors.sensor_ws2300.Sensor_WS2300(self.cfg)     
             
