@@ -118,7 +118,7 @@ class Sensor_WS90RTLSDR(sensors.sensor_external.Sensor):
         ppm = str(self.cfg.rtlsdr_ppm)
         #myrevision = getrevision()
         log("Starting rtl_433 on %s MHz" % (freq))
-        cmd = "sudo /usr/local/bin/rtl_433 -f %s -R 78 -p %s -F syslog:%s:%s > /dev/null" % (freq,ppm,UDP_IP,UDP_PORT)
+        cmd = "sudo /usr/local/bin/rtl_433 -f %s -R 244 -p %s -F syslog:%s:%s > /dev/null" % (freq,ppm,UDP_IP,UDP_PORT)
         #cmd = "/usr/local/bin/rtlsdr -q -r '/swpi/gfile001.data' -R 32 -l 0  > /dev/null" 
         os.system(cmd)
         
