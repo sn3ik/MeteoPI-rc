@@ -98,7 +98,7 @@ def meteopi():
 
     os.system("sudo mv meteopi /home/pi")
     os.system("sudo chmod 0755 /home/pi/")
-    os.system("sudo chmod 0755 /home/pi/meteopi/")
+    os.system("sudo chmod 0777 /home/pi/meteopi/*")
 
     os.chdir("extras")
     os.system("sudo mv config.txt /boot/firmware/")
