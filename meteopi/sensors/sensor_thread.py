@@ -121,6 +121,6 @@ class SensorThread(threading.Thread):
             os.system("sudo ./killmeteopi.sh")
          
         # mail loop    
-        while not self._stop.isSet():
+        while not self._stop.is_set():
             sensor.GetData()
                     
