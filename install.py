@@ -4,7 +4,6 @@ import os
 import pwd
 
 
-
 def main():
     menu()
 
@@ -47,7 +46,6 @@ def menu():
         menu()
 
 def lighttpd():
-    #os.system("git clone https://github.com/sn3ik/MeteoPI.git")
     os.system("sudo apt update && sudo apt upgrade")
     os.system("sudo apt-get install php-ssh2")
     
@@ -102,6 +100,7 @@ def meteopi():
 
     os.chdir("extras")
     os.system("sudo mv config.txt /boot/firmware/")
+    os.system("sudo mv blacklist.conf /etc/modprobe.d/")
 
     os.chdir("bin")
     os.system("sudo mv * /usr/local/bin")
