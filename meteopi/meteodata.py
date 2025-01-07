@@ -20,6 +20,7 @@ import math
 import os
 import globalvars
 from colorama import Fore, Back, Style
+import sun
 
 def log(message) :
     print (datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] [METEODATA____] -") , message)
@@ -308,76 +309,19 @@ class MeteoData(object):
                 dbCursor_del.execute("DELETE FROM METEO where datetime(TIMESTAMP_LOCAL) < datetime('now','-2 day','localtime')")
                 conn_del.commit()
                 conn_del.close()
-
-            msg = ""
-            msg = msg + "Processed data:"
-            if self.wind_dir_code !=None :
-                msg = msg +     "\n     Wind Dir: " + str(self.wind_dir_code)
-            if self.wind_ave != None :
-                msg = msg +     " - Wind Speed: " + str(self.wind_ave) + " km"
-            if self.wind_gust != None :
-                msg = msg +     " - Wind Gust: " + str(self.wind_gust) + " km"
-            if self.winDayMin != None :
-                msg = msg + " - Min: %d" % self.winDayMin + " km"
-            if self.winDayMax != None :
-                msg = msg + " - Max: %d" % self.winDayMax + " km"
-            if self.wind_trend != None :
-                msg = msg +     " - Trend: %.2f" % self.wind_trend
-            if self.temp_out != None :
-                msg = msg +     "\n     Temp out: %.1f" % self.temp_out + " *"
-            if self.temp_in  != None :
-                msg = msg +     " - Temp in: %.1f" % self.temp_in + " *"
-            if self.TempOutMin != None :
-                msg = msg + " - Temp Min: %d" % self.TempOutMin + " *"
-            if self.TempOutMax != None :
-                msg = msg + " - Temp Max: %d" % self.TempOutMax + " *"
-            if self.hum_out != None :
-                msg = msg +     "\n     Humidity out: %.1f" % self.hum_out + " %"
-            if self.hum_in  != None :
-                msg = msg +     " - Humidity in: %.1f" % self.hum_in + " %"
-            if self.rel_pressure != None :
-                msg = msg +     "\n     Pressure: %d" % self.rel_pressure + " hPa"
-            if self.rain != None :
-                msg = msg +     "\n     Rain tot: %.1f" % self.rain + " mm"
-            if self.rain_rate != None :
-                msg = msg +     " - Rain Day: %.1f" % self.rain_rate + " mm"
-            if self.rain_rate_1h != None :
-                msg = msg +     " - Rain 1h: %.1f" % self.rain_rate_1h + " mm"
-            if self.rain_rate_24h != None :
-                msg = msg +     " - Rain 24h: %.1f" % self.rain_rate_24h + " mm"
-            if self.cloud_base_altitude != None :
-                msg = msg +     "\n     Cloud Base: %d" % self.cloud_base_altitude + " meter"
-                msg = msg +     " - Cond: " + str(metar())
-            if self.uv != None :
-                msg = msg +     " - UV: %d" % self.uv
-            if self.illuminance != None :
-                msg = msg +     " - Lux: %.1f" % self.illuminance
-                msg = msg +     " - Watts/m: %.1f" % (self.illuminance*0.0079)
-            if self.lux != None :
-                msg = msg +     "\n     Lux: %.1f" % self.lux
-            if self.luxfull != None :
-                msg = msg +     " - LuxFull: %.1f" % self.luxfull
-            if self.ir != None :
-                msg = msg +     " - IR: %.1f" % self.ir
-            if self.pm25  != None :
-                msg = msg +     "\n     PM 2.5: %.1f" % self.pm25 + " um"
-            if self.pm25_max  != None :
-                msg = msg +     " - Max: %.1f" % self.pm25_max + " um"
-            if self.pm10  != None :
-                msg = msg +     "\n     PM 10: %.1f" % self.pm10 + " um"
-            if self.pm10_max  != None :
-                msg = msg +     " - Max: %.1f" % self.pm10_max + " um"
-            msg = msg + "\n"
-            #log(msg)
-            
+    
             toupload = globalvars.meteo_data.interval-(datetime.datetime.now()-globalvars.meteo_data.timetoupload).seconds
-
             log("Upload data to server in %s seconds" % toupload)
-
             
+            s=sun.sun(lat=self.cfg.location_latitude,long=self.cfg.location_longitude)
+            log('Sunrise: '+str(s.sunrise())+' Solarnoon: '+str(s.solarnoon())+' Sunset: '+str(s.sunset()))
+        
             output = ""
             output = output + "Processed data:\n"
             output = output + "-----------------------------------------------------------------------------------------------------------\n"
+            
+            #output = output + "{:<15} {:<18} {:<18} {:<18}".format('Ephemeris','Sunrise: '+str(s.sunrise()),'Max: '+str(s.solarnoon()),'Sunset: '+str(s.sunset()))
+            #output = output + "\n"
             
             output = output + "{:<15} {:<18} {:<18} {:<18} {:<18} {:<18}".format('Wind',str(self.wind_dir_code) +
             ' - ' + str(self.wind_ave) + ' km','Gust: ' + str(self.wind_gust) + ' km',
@@ -493,3 +437,4 @@ class CameraFiles(object):
         self.img1IPFileName = None
         self.img2IPFileName = None
         self.cPIFilemane = None
+
