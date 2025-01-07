@@ -32,6 +32,7 @@ import json
 import socket
 import json
 import psutil
+import logging
 
 # start rtl_433 with `-F syslog:YOURTARGETIP:1433`, and change
 # to `UDP_IP = "0.0.0.0"` (listen to the whole network) below.
@@ -42,7 +43,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 DEBUG = False
 
 def log(message) :
-    print (datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] [WS90RTLSDR_] -") , message)
+    print (datetime.datetime.now().strftime("[%d/%m/%Y-%H:%M:%S] [WS90RTLSDR___] -") , message)
     
 def get_wind_dir_text(wind_dir):
     """Return an array to convert wind direction integer to a string."""
@@ -105,11 +106,11 @@ class Sensor_WS90RTLSDR(sensors.sensor_external.Sensor):
         
     def readfreq(self):
         if self.cfg.rtlsdr_frequency == 433:
-            return '433920000'
+            return '433M'
         elif self.cfg.rtlsdr_frequency == 868:
-            return '868200000'
+            return '868M'
         elif self.cfg.rtlsdr_frequency == 915:
-            return '915000000'  
+            return '915M'  
 
     
     def run(self):
@@ -118,7 +119,7 @@ class Sensor_WS90RTLSDR(sensors.sensor_external.Sensor):
         ppm = str(self.cfg.rtlsdr_ppm)
         #myrevision = getrevision()
         log("Starting rtl_433 on %s MHz" % (freq))
-        cmd = "sudo /usr/local/bin/rtl_433 -f %s -R 244 -p %s -F syslog:%s:%s > /dev/null" % (freq,ppm,UDP_IP,UDP_PORT)
+        cmd = "sudo /usr/local/bin/rtl_433 -f %s -s 1024k -p %s -F syslog:%s:%s > /dev/null" % (freq,ppm,UDP_IP,UDP_PORT)
         #cmd = "/usr/local/bin/rtlsdr -q -r '/swpi/gfile001.data' -R 32 -l 0  > /dev/null" 
         os.system(cmd)
         
@@ -165,67 +166,84 @@ class Sensor_WS90RTLSDR(sensors.sensor_external.Sensor):
             line = self.parse_syslog(line)
             # Decode the message as JSON
             data = json.loads(line)
-
-            label = data["model"]
-            if "channel" in data:
-                label += ".CH" + str(data["channel"])
-            elif "id" in data:
-                label += ".ID" + str(data["id"])
-                    
-            station_id = data["id"]
-
-            if "battery_ok" in data:
-                if data["battery_ok"] == 0:
-                    log(label + ' Battery empty!')
-
-            if "temperature_C" in data:
-                temp = float(data["temperature_C"])
-            else:
-                temp = 0
-
-            if "humidity" in data:
-                hum = (data["humidity"])
-            else:
-                hum = 0
-                   
-            if "wind_dir_deg" in data:
-                dire = float(data["wind_dir_deg"])
-                dir_code = get_wind_dir_text(dire)
-            else:
-                dire = 0
-                dir_code = "ERR"
-
-            if "wind_avg_m_s" in data:
-                wind_speed = float(data["wind_avg_m_s"])
-                wind_speed = round((wind_speed*self.cfg.windspeed_gain + self.cfg.windspeed_offset)*3.6,1)
-            else:
-                wind_speed = 0
-
-            if "wind_max_m_s" in data:
-                gust_speed  = float(data["wind_max_m_s"])
-                gust_speed  = round((gust_speed*self.cfg.windspeed_gain + self.cfg.windspeed_offset)*3.6,1)
-            else:
-                gust_speed = 0
-
-            if "rain_mm" in data:
-                rain = data['rain_mm']
-                rain = (round(rain,2))
-            else:
-                rain = 0
-
-            if "uvi" in data:
-                uv_index = (data['uvi'])
-            else:
-                uv_index = 0
-
-            if "light_lux" in data:
-                watts_sqmeter = float(data['light_lux'])
-            else:
-                watts_sqmeter = 0
-
             #log(data)
-            log("New data received from station %s. Processing..." % station_id)
-            return station_id,temp,hum,wind_speed,gust_speed,dir_code,dire,rain,uv_index,watts_sqmeter 
+
+            if "model" in data:
+                       
+                station_id = data["id"]
+
+                if "battery_ok" in data:
+                    if data["battery_ok"] == 0:
+                        log(label + ' Battery empty!')
+                        
+                if "battery_mV" in data:
+                    battery_mV = str(data["battery_mV"])
+
+                if "temperature_C" in data:
+                    temp = float(data["temperature_C"])
+                else:
+                    temp = 0
+
+                if "humidity" in data:
+                    hum = (data["humidity"])
+                else:
+                    hum = 0
+                       
+                if "wind_dir_deg" in data:
+                    dire = float(data["wind_dir_deg"])
+                    dir_code = get_wind_dir_text(dire)
+                else:
+                    dire = 0
+                    dir_code = "ERR"
+
+                if "wind_avg_m_s" in data:
+                    wind_speed = float(data["wind_avg_m_s"])
+                    wind_speed = round((wind_speed*self.cfg.windspeed_gain + self.cfg.windspeed_offset)*3.6,1)
+                else:
+                    wind_speed = 0
+
+                if "wind_max_m_s" in data:
+                    gust_speed  = float(data["wind_max_m_s"])
+                    gust_speed  = round((gust_speed*self.cfg.windspeed_gain + self.cfg.windspeed_offset)*3.6,1)
+                else:
+                    gust_speed = 0
+                    
+                if "uvi" in data:
+                    uv_index = (data['uvi'])
+                else:
+                    uv_index = 0
+                    
+                if "light_lux" in data:
+                    watts_sqmeter = float(data['light_lux'])
+                else:
+                    watts_sqmeter = 0
+                    
+                if "flags" in data:
+                    flags = (data['flags'])
+
+                if "rain_mm" in data:
+                    rain = data['rain_mm']
+                    rain = (round(rain,2))
+                else:
+                    rain = 0
+                    
+                if "supercap_V" in data:
+                    supercap_V = str(data['supercap_V'])                
+
+                if "data" in data:
+                    extra_data = str(data['data'])  
+                    
+                log ("Battery voltage: "+str(battery_mV) +"mV - Supercap voltage: "+ str(supercap_V))
+                log ("extradata: " + str(extra_data))
+                log ("Flags: "+ str(flags))
+
+                #log(data)
+                log("New data received from station %s. Processing..." % station_id)
+                return station_id,temp,hum,wind_speed,gust_speed,dir_code,dire,rain,uv_index,watts_sqmeter
+                            
+            else:
+                log("Receiving irrilevant msg")
+                return 0,0,0,0,0,"ERR",0,0,0,0
    
         except KeyError:
             pass
@@ -243,43 +261,31 @@ class Sensor_WS90RTLSDR(sensors.sensor_external.Sensor):
                 log('rtl_433 is running...')
                 
                 station_id,temp,hum,wind_speed,gust_speed,dir_code,dire,rain, uv_index, watts_sqmeter =  self.ReadData()
-
+                #log (str(station_id)+" "+str(temp)+" "+str(hum)+" "+str(wind_speed)+" "+str(gust_speed)+" "+str(dir_code)+" "+str(dire)+" "+str(rain)+" "+ str(uv_index)+" "+ str(watts_sqmeter))
                 last_data_time = get_datetime()
-                globalvars.meteo_data.status = 0
                 globalvars.meteo_data.last_measure_time = last_data_time
                 globalvars.meteo_data.idx = globalvars.meteo_data.last_measure_time
-                globalvars.meteo_data.hum_out = hum
-                globalvars.meteo_data.temp_out = temp
-                globalvars.meteo_data.wind_ave   = wind_speed
-                globalvars.meteo_data.wind_gust = gust_speed
-                globalvars.meteo_data.wind_dir = dire #*22.5
-                globalvars.meteo_data.wind_dir_code = dir_code
-                globalvars.meteo_data.rain = rain
-                globalvars.meteo_data.uv = uv_index
-                globalvars.meteo_data.illuminance = watts_sqmeter
 
-                sensors.sensor_external.Sensor.GetData(self)
-            
-                #last_data_time = get_datetime()
-                time.sleep(50)
+                if station_id != 0 and dir_code != "ERR" : 
+                    globalvars.meteo_data.status = 0
+                    globalvars.meteo_data.hum_out = hum
+                    globalvars.meteo_data.temp_out = temp
+                    globalvars.meteo_data.wind_ave   = wind_speed
+                    globalvars.meteo_data.wind_gust = gust_speed
+                    globalvars.meteo_data.wind_dir = dire #*22.5
+                    globalvars.meteo_data.wind_dir_code = dir_code
+                    globalvars.meteo_data.rain = rain
+                    globalvars.meteo_data.uv = uv_index
+                    globalvars.meteo_data.illuminance = watts_sqmeter
+
+                    sensors.sensor_external.Sensor.GetData(self)
+
+                time.sleep(5)
             else:
                 log('rtl_433 is not running, restart...')
                 cmd = "meteopi restart"
-                os.system(cmd)
+                #os.system(cmd)
             
-            #tosleep = 50-(datetime.datetime.now()-last_data_time).seconds
-            #if DEBUG: print ("Sleeping  ", tosleep)
-            #if (tosleep > 0 and tosleep < 50 ): 
-            #    time.sleep(tosleep)
-            #else:
-            #    time.sleep(50)
-            
-            #new_last_data_time = get_datetime()
-            #while ( new_last_data_time == None or new_last_data_time == last_data_time):
-            #    time.sleep(10)
-            #    new_last_data_time = get_datetime()               
-            
-            #last_data_time = new_last_data_time
 
 if __name__ == '__main__':
 
