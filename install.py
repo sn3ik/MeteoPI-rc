@@ -93,6 +93,8 @@ pass
 
 def meteopi():
     #os.chdir("MeteoPI-rc")
+    os.system("sudo apt install imagemagick")
+    
 
     os.system("sudo mv meteopi /home/pi")
     os.system("sudo chmod 0755 /home/pi/")
