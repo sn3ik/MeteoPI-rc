@@ -94,7 +94,7 @@ pass
 def meteopi():
     #os.chdir("MeteoPI-rc")
     os.system("sudo apt install imagemagick")
-    
+    os.system("sudo pip3 install RPi.bme280 --break-system-packages)
 
     os.system("sudo mv meteopi /home/pi")
     os.system("sudo chmod 0755 /home/pi/")
