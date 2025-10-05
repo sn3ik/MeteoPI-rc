@@ -140,7 +140,7 @@ def meteopi():
     os.system("git clone https://github.com/merbanan/rtl_433.git")
     os.chdir("rtl_433")
     os.system("cmake -B build")
-    os.system("cmake --build build --target install")
+    os.system("sudo cmake --build build --target install")
 
 
     print('\033[92m'"MeteoPI installato con successo'\033[0m'")
